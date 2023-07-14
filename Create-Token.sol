@@ -645,11 +645,16 @@ contract ContractDeployer {
   }
   uint256 public totalContractsDeployed;
   mapping(uint256 => DeployerDetails) public DeployedContracts;
+
+  event ContractDeployed(address indexed deployer, address indexed deployedContract);
   
-  function Deploy(uint256 _tokenTotalSupply, string memory _tokenName, string memory _tokenSymbol, uint8 _tokenDecimals, uint256 _buyTax, uint256 _sellTax, uint256 _autoBurnPercetage, uint256 _autoLiquidityPercentage, address _taxWallet) public {
+  function Deploy(uint256 _tokenTotalSupply, string memory _tokenName, string memory _tokenSymbol, uint8 _tokenDecimals, uint256 _buyTax, uint256 _sellTax, uint256 _autoBurnPercetage, uint256 _autoLiquidityPercentage, address _taxWallet) public returns(address) {
     address deployedContract = address(new Token( _tokenTotalSupply,  _tokenName, _tokenSymbol,  _tokenDecimals,  _buyTax,  _sellTax,  _autoBurnPercetage,  _autoLiquidityPercentage,  _taxWallet));
     
     DeployedContracts[totalContractsDeployed] = DeployerDetails({deployer:tx.origin, contractAddress:deployedContract});
     totalContractsDeployed++;
+
+    emit ContractDeployed(tx.origin, deployedContract);
+    return deployedContract;
   }
 }
