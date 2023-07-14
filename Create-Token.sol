@@ -192,7 +192,7 @@ contract Token is Ownable {
     mapping(address => bool) private blacklisted;
 
     mapping(address => bool) private _isExcludedFromFee;
-    bool public trade_open;
+    bool public trade_open=true;    //trade is open by default
 
     address public marketingWallet;
     address constant public DEAD = 0x000000000000000000000000000000000000dEaD;
