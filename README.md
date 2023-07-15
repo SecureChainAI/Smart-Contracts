@@ -1,2 +1,2 @@
 # Smart-Contracts
-This repository hosts are the smart contracts related to the SecureChain AI
+All the smart contracts related to any components in the SecureChain AI ecosystem. This includes mostly application level smart contracts.
